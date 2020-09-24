@@ -15,6 +15,15 @@ Task 1:
  [80,90) -> 4
  [90,100] -> 5
 
+ Expected Results
+2: {name: "Charlie", score: 98, mark: 5}
+3: {name: "Denis", score: 78, mark: 3}
+4: {name: "Eve", score: 56, mark: 2}
+5: {name: "Frank", score: 14, mark: 1}
+6: {name: "Gabe", score: 49, mark: 1}
+7: {name: "Hugo", score: 39, mark: 1}
+8: {name: "Ivan", score: 100, mark: 5}
+
  Task 3: Grade them according to a Curve std=10
 
  Task 4: Generate HTML table from the above results
