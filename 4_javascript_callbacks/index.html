@@ -12,7 +12,11 @@
             let name = document.forms[0].elements[0].value;
             let birthDate = document.forms[0].elements[1].value;
             if(name === "" || birthDate === "") return;
-            provideService({name : name, birthDate : birthDate});
+            provideService(
+                {name : name, birthDate : birthDate},
+                (name) => {alert(`${name} is served!`)},
+                (name) => {alert(`${name} is too young`)}
+                );
         }
     </script>
 </head>
