@@ -2,9 +2,18 @@
 
 <head>
     <script src="index.js"></script>
+    <script src="bartender.js"></script>
     <script>
         var counter_1 = counter('counter');
         var counter_2 = counter('counter_2');
+
+        function validate(event) {
+            event.preventDefault();
+            let name = document.forms[0].elements[0].value;
+            let birthDate = document.forms[0].elements[1].value;
+            if(name === "" || birthDate === "") return;
+            provideService({name : name, birthDate : birthDate});
+        }
     </script>
 </head>
 
@@ -15,6 +24,18 @@
     <span id="counter"></span>
     <button onclick="counter_2()">Click</button>
     <span id="counter_2"></span>
+    <div>
+        <form> 
+            <label>Name</label>
+            <input type="text" />
+            <br />
+            <label>Birth Date</label>
+            <input type="date">
+            <br />
+            <button onclick="validate(event)">Send</button>
+        </form>
+
+    </div>
 </body>
 
 </html>

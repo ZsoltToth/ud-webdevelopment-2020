@@ -129,3 +129,15 @@ var counter = (elementId) =>{
         document.getElementById(elementId).innerText=counter;
     }
 }
+7
+//Currying
+var logarithm = (base) => {
+    return (x) => {
+        return Math.log(x) / Math.log(base);
+    }
+}
+
+var log2 = logarithm(2);
+var log10 = logarithm(10);
+
+console.log(`log_2(8) = ${log2(8)}`);
