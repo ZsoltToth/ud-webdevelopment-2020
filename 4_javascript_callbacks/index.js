@@ -141,3 +141,19 @@ var log2 = logarithm(2);
 var log10 = logarithm(10);
 
 console.log(`log_2(8) = ${log2(8)}`);
+
+
+var p = new Promise(
+    (resolve,reject)=>{
+        setTimeout(()=>{resolve()},10000);
+});
+p.then(()=>{console.log('Done!')});
+
+var waitFor = (sec) =>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(sec);}, sec * 1000);
+    })
+}
+
+waitFor(10).then((t) => {console.log(`I have waited for ${t} secs`)});
+waitFor(5).then((t) => {console.log(`I have waited for ${t} secs`)});
