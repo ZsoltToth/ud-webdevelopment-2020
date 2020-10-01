@@ -2,13 +2,19 @@
 
 <head>
     <script src="index.js"></script>
+    <script>
+        var counter_1 = counter('counter');
+        var counter_2 = counter('counter_2');
+    </script>
 </head>
 
 <body>
     <h1 id="title">Hello World</h1>
     <div id="exam_results">Table -> (Name, Passed/Failed)</div>
-    <button onclick="increase()">Click</button>
+    <button onclick="counter_1()">Click</button>
     <span id="counter"></span>
+    <button onclick="counter_2()">Click</button>
+    <span id="counter_2"></span>
 </body>
 
 </html>

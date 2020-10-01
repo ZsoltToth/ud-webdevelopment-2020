@@ -121,9 +121,11 @@ document.addEventListener(
 
 });
 
-var counter = 0;
-
-var increase = () => {
-    counter += 1;
-    document.getElementById('counter').innerText=counter;
+//Closure 
+var counter = (elementId) =>{
+    var counter = 0;
+    return () => {
+        counter += 1;
+        document.getElementById(elementId).innerText=counter;
+    }
 }
