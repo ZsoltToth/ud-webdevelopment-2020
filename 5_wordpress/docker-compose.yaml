@@ -1,0 +1,14 @@
+"version: "3.3"
+services:
+  artemis:
+    image: 'ubuntu'
+    restart: 'always'
+    hostname: 'artemis'
+    stdin_open: true
+    tty: true
+  athena:
+    image: 'ubuntu'
+    restart: 'always'
+    hostname: 'athena'
+    stdin_open: true
+    tty: true
