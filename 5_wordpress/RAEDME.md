@@ -34,6 +34,10 @@ CREATE DATABASE wordpress;
 
 --- SHOW databases;
 
+CREATE USER alice IDENTIFIED BY 'secret';
+GRANT ALL ON wordpress.* TO 'alice'@'%';
+
+---mysql -u alice -psecret 
 ```
 # Artemis
 ```
