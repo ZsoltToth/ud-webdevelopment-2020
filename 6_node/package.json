@@ -1,0 +1,17 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "description": "Node Example",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "jest": "26.4.2"
+  },
+  "author": "Zsolt Toth",
+  "license": "ISC"
+}
