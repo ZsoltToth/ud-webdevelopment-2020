@@ -5,7 +5,7 @@ const _isNameValid = (name) =>{
     // - 2-4 words
     // - only letters
     // - Each Word Starts With Capital Letter
-    return name.match(/^([A-Z][a-z]+\s?){2,4}$/g) != null;
+    return name.match(/^([A-Z][a-z]+\s?){1,3}([A-Z][a-z]+)$/) != null;
 }
 
 const validatePerson = (

@@ -4,13 +4,19 @@
   "description": "Node Example",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "css" : "npx node-sass ./src/css/style.scss ./dist/css/style.css",
+    "css:minified" : "npm run css -- --output-style compressed",
+    "build": "npm install && npm test && npm run css"
   },
   "dependencies": {
     "winston": "^3.3.3"
   },
   "devDependencies": {
-    "jest": "26.4.2"
+    "jest": "26.4.2",
+    "node-sass": "^4.14.1",
+    "bootstrap": "^4.5.3"
   },
   "author": "Zsolt Toth",
   "license": "ISC"

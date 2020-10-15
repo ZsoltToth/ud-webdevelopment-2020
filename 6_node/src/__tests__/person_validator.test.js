@@ -70,4 +70,15 @@ describe('Person Validator Tests',()=>{
         expect(validCallbackMock.mock.calls.length).toBe(0);
         expect(rejectCallbackMock.mock.calls[0][0]).toEqual(['name']);
     });
+
+    it('tests if a name with more than 5 words valid or not', ()=>{
+        const tooLongName = "John Johnny Jack Joe Doe";
+        expect(_isNameValid(tooLongName)).toBe(false);
+    });
+
+    it('tests if a name ends with sapce',()=>{
+        const nameWithSpaceInTheEnd = 'John Doe ';
+        expect(_isNameValid(nameWithSpaceInTheEnd)).toBe(false);
+    });
 });
+

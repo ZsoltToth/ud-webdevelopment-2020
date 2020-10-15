@@ -4,3 +4,6 @@ package-lock.json
 .npm
 .config
 .node_repl_history
+
+dist
+coverage
