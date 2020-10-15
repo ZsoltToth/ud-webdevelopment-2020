@@ -1,4 +1,11 @@
 ```bash
+usermod -aG docker $USER
+#logout login 
+loginctl terminate-user $USER
+```
+
+
+```bash
 docker run -it --name athena ubuntu
 ```
 

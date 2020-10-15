@@ -26,6 +26,16 @@ Task 1:
 
  Task 3: Grade them according to a Curve std=10
 
+1: {name: "Bob", score: 39, mark: 1, curvedGrade: 3}
+2: {name: "Charlie", score: 98, mark: 5, curvedGrade: 5}
+3: {name: "Denis", score: 78, mark: 3, curvedGrade: 4}
+4: {name: "Eve", score: 56, mark: 2, curvedGrade: 3}
+5: {name: "Frank", score: 14, mark: 1, curvedGrade: 1}
+6: {name: "Gabe", score: 49, mark: 1, curvedGrade: 3}
+
+Question: Who get other grade due to the curve?
+
+
  Task 4: Generate HTML table from the above results
  ...
 
