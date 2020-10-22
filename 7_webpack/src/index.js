@@ -1,6 +1,6 @@
 
 const greetings = ({name = 'World'}, callback) =>{
-    callback(`Hello ${name}!`);
+    callback(`Bye ${name}!`);
 }
 
 module.exports = {

@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "js" : "webpack",
+    "js:prod" : "npm run js -- --mode production",
+    "js:dev" : "npm run js -- --mode development",
+    "js:dev:watch" : "npm run js:dev -- --watch"
   },
   "devDependencies": {
     "webpack": "^5.1.3",
