@@ -1,0 +1,19 @@
+[
+  {
+    "orderId" : 0,
+    "customer" : {
+      "name" : "John Doe",
+      "age" : 42
+    },
+    "products": ["milk", "lightsaber"]
+  },
+
+  {
+    "orderId" : 1,
+    "customer" : {
+      "name" : "Jane Doe",
+      "age" : 42
+    },
+    "products": ["Baby Yoda"]
+  }
+]

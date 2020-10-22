@@ -10,10 +10,13 @@
     "js:dev": "npm run js -- --mode development",
     "js:dev:watch": "npm run js:dev -- --watch",
     "css": "node-sass src/style.scss dist/css/style.css",
-    "css:watch" : "npm run css -- --watch",
+    "css:watch": "npm run css -- --watch",
     "css:min": "npm run css -- --output-style compressed",
     "development": "run-p css:watch js:dev:watch",
-    "build" : "run-s js:prod css:min"
+    "build": "run-s js:prod css:min"
+  },
+  "dependencies": {
+    "axios": "^0.20.0"
   },
   "devDependencies": {
     "webpack": "^5.1.3",

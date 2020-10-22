@@ -1,4 +1,4 @@
-const {submit : submitOrder} = require('./orders')
+const {submit : submitOrder, list : listOrders} = require('./orders')
 
 const greetings = ({name = 'World'}, callback) =>{
     callback(`Hello ${name}!`);
@@ -6,5 +6,6 @@ const greetings = ({name = 'World'}, callback) =>{
 
 module.exports = {
     greetings : greetings,
-    submitOrder : submitOrder
+    submitOrder : submitOrder,
+    listOrders : listOrders
 }
