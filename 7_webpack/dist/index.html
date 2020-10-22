@@ -7,8 +7,26 @@
     <script src="js/bundle.js"></script>
 </head>
 <body>
+<div class="row">
 <button onclick="(
     ()=> App.greetings({name : 'Webpack'}, alert)
     )();">Alert</button>
+</div>
+<div class="row">
+    <form>
+        <input name="name" type="text"/><br>
+        <input name="age" type="number"/><br>
+        <button onclick="( (event)=>{
+            event.preventDefault();
+            App.submitOrder({
+                name : document.forms[0].elements[0].value,
+                age : document.forms[0].elements[1].value,
+            },
+            () => { console.log('SUCCESS')},
+            () => {console.log('FAILURE')}
+            )
+        } )(event)">Submit Order</button>
+    </form>
+</div>
 </body>
 </html>
