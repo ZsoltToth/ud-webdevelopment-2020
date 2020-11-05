@@ -13,7 +13,11 @@ public class UserDaoImpl implements  UserDao{
     private Collection<User> database;
 
     public UserDaoImpl() {
-        this.database = new HashSet<>();
+        this(new HashSet<>());
+    }
+
+    protected  UserDaoImpl(Collection<User> database){
+        this.database = database;
     }
 
     @Override
