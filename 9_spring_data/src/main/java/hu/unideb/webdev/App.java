@@ -1,5 +1,6 @@
 package hu.unideb.webdev;
 
+import hu.unideb.webdev.dao.AddressDao;
 import hu.unideb.webdev.dao.AddressRepository;
 import hu.unideb.webdev.dao.CityRepository;
 import hu.unideb.webdev.dao.CountryRepository;
@@ -23,7 +24,7 @@ import java.util.Date;
  *  - DB_PASS secret
  *
  *  Example configuration
- * @see ${project.basedir}/src/main/resources/sql/sakila.sh
+ * @see {project.basedir}/src/main/resources/sql/sakila.sh
  */
 @SpringBootApplication
 public class App implements CommandLineRunner {
@@ -39,20 +40,7 @@ public class App implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println( "Hello World!" );
-        CountryRepository countryRepository = context.getBean(CountryRepository.class);
-//        repository.save(new CountryEntity(0,"Vadia",new Timestamp((new Date()).getTime())));
-//        repository.findAll().forEach(System.out::println);
-//        System.out.println("--------------------");
-//        repository.findByName("Vadia").stream().forEach(System.out::println);
-        CityRepository repository = context.getBean(CityRepository.class);
-        repository.findAll().forEach(System.out::println);
-        repository.save(new CityEntity(0,
-                "El Dorado",
-                countryRepository.findById(51).get(),
-                new Timestamp((new Date()).getTime())
-        ));
-
-        AddressRepository addressRepository = context.getBean(AddressRepository.class);
-        addressRepository.findAll().forEach(System.out::println);
+        AddressDao dao = context.getBean(AddressDao.class);
+        dao.readAll().stream().forEach(System.out::println);
     }
 }
