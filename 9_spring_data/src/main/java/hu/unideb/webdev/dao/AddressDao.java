@@ -15,5 +15,6 @@ import java.util.Collection;
  */
 public interface AddressDao {
 
+    void createAddress(Address address);
     Collection<Address> readAll();
 }

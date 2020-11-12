@@ -6,6 +6,7 @@ import hu.unideb.webdev.dao.CityRepository;
 import hu.unideb.webdev.dao.CountryRepository;
 import hu.unideb.webdev.dao.entity.CityEntity;
 import hu.unideb.webdev.dao.entity.CountryEntity;
+import hu.unideb.webdev.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,6 +42,16 @@ public class App implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println( "Hello World!" );
         AddressDao dao = context.getBean(AddressDao.class);
-        dao.readAll().stream().forEach(System.out::println);
+//        dao.readAll().stream().forEach(System.out::println);
+        Address model = new Address(
+                "address1",
+                "address2",
+                "district",
+                "Batna",
+                "Algeria",
+                "postalCode",
+                "phone"
+                );
+        dao.createAddress(model);
     }
 }

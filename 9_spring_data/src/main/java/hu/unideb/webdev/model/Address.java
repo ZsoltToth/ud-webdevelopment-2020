@@ -1,10 +1,12 @@
 package hu.unideb.webdev.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.ToString;
 
 @AllArgsConstructor
 @ToString
+@Getter
 public class Address {
 
     private String address;
