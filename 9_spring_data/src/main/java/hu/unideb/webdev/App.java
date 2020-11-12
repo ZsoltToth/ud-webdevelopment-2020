@@ -1,5 +1,6 @@
 package hu.unideb.webdev;
 
+import hu.unideb.webdev.dao.AddressRepository;
 import hu.unideb.webdev.dao.CityRepository;
 import hu.unideb.webdev.dao.CountryRepository;
 import hu.unideb.webdev.dao.entity.CityEntity;
@@ -39,5 +40,8 @@ public class App implements CommandLineRunner {
                 countryRepository.findById(51).get(),
                 new Timestamp((new Date()).getTime())
         ));
+
+        AddressRepository addressRepository = context.getBean(AddressRepository.class);
+        addressRepository.findAll().forEach(System.out::println);
     }
 }
