@@ -1,7 +1,7 @@
 package hu.unideb.webdev.dao.entity;
 
 import lombok.*;
-import org.springframework.data.geo.Point;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -39,8 +39,8 @@ public class AddressEntity {
     @Column
     private String phone;
 
-    @Column()
-    private String location;
+    @Column(columnDefinition = "geometry")
+    private Point location;
     @Column(name="last_update")
     private Timestamp lastUpdate;
 
