@@ -14,6 +14,17 @@ import org.springframework.context.ApplicationContext;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * Run -> Configuration -> Environment Variables
+ *  - DB_HOST localhost /127.0.0.1
+ *  - DB_PORT 3306
+ *  - DB_NAME sakila
+ *  - DB_USER root
+ *  - DB_PASS secret
+ *
+ *  Example configuration
+ * @see ${project.basedir}/src/main/resources/sql/sakila.sh
+ */
 @SpringBootApplication
 public class App implements CommandLineRunner {
 
