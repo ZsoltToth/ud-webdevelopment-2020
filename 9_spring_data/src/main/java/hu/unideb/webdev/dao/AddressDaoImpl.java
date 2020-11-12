@@ -32,6 +32,7 @@ public class AddressDaoImpl implements AddressDao{
         CityEntity cityEntity = cityRepository.findByName(address.getCity()).stream()
                 .filter(entity -> entity.getCountry().getName().equals(address.getCountry()))
                 .findFirst().get();
+        // TODO : Homework! What does happen if the City (or Country) is not found in the database? Handle it!
         log.info("City Entity: {}", cityEntity);
 
         addressEntity = AddressEntity.builder()
