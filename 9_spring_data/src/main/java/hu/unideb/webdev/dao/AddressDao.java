@@ -1,5 +1,6 @@
 package hu.unideb.webdev.dao;
 
+import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 
 import java.util.Collection;
@@ -15,6 +16,6 @@ import java.util.Collection;
  */
 public interface AddressDao {
 
-    void createAddress(Address address);
+    void createAddress(Address address) throws UnknownCountryException;
     Collection<Address> readAll();
 }

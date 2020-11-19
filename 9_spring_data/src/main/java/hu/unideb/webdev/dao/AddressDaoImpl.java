@@ -2,17 +2,19 @@ package hu.unideb.webdev.dao;
 
 import hu.unideb.webdev.dao.entity.AddressEntity;
 import hu.unideb.webdev.dao.entity.CityEntity;
+import hu.unideb.webdev.dao.entity.CountryEntity;
+import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -26,14 +28,9 @@ public class AddressDaoImpl implements AddressDao{
     private final CountryRepository countryRepository;
 
     @Override
-    public void createAddress(Address address) {
-        AddressEntity addressEntity = null;
+    public void createAddress(Address address) throws UnknownCountryException {
+        AddressEntity addressEntity;
         GeometryFactory geometryFactory = new GeometryFactory();
-        CityEntity cityEntity = cityRepository.findByName(address.getCity()).stream()
-                .filter(entity -> entity.getCountry().getName().equals(address.getCountry()))
-                .findFirst().get();
-        // TODO : Homework! What does happen if the City (or Country) is not found in the database? Handle it!
-        log.info("City Entity: {}", cityEntity);
 
         addressEntity = AddressEntity.builder()
                 .address(address.getAddress())
@@ -43,7 +40,7 @@ public class AddressDaoImpl implements AddressDao{
                 .phone(address.getPhone())
                 .location(geometryFactory.createPoint(new Coordinate()))
                 .lastUpdate(new Timestamp((new Date()).getTime()))
-                .city(cityEntity)
+                .city(queryCity(address.getCity(), address.getCountry()))
                 .build();
         log.info("AddressEntity: {}", addressEntity);
         try {
@@ -52,6 +49,28 @@ public class AddressDaoImpl implements AddressDao{
         catch(Exception e){
             log.error(e.getMessage());
         }
+    }
+
+    private CityEntity queryCity(String city, String country) throws UnknownCountryException {
+
+        Optional<CityEntity> cityEntity = cityRepository.findByName(city).stream()
+                .filter(entity -> entity.getCountry().getName().equals(country))
+                .findFirst();
+        if(!cityEntity.isPresent()){
+            Optional<CountryEntity> countryEntity = countryRepository.findByName(country);
+            if(!countryEntity.isPresent()){
+                throw new UnknownCountryException(country);
+            }
+            cityEntity = Optional.ofNullable(CityEntity.builder()
+                    .name(city)
+                    .country(countryEntity.get())
+                    .lastUpdate(new Timestamp((new Date()).getTime()))
+                    .build());
+            cityRepository.save(cityEntity.get());
+            log.info("Recorded new City: {}, {}", city, country);
+        }
+        log.trace("City Entity: {}", cityEntity);
+        return cityEntity.get();
     }
 
     @Override

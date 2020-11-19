@@ -1,20 +1,14 @@
 package hu.unideb.webdev;
 
-import hu.unideb.webdev.dao.AddressDao;
-import hu.unideb.webdev.dao.AddressRepository;
-import hu.unideb.webdev.dao.CityRepository;
-import hu.unideb.webdev.dao.CountryRepository;
-import hu.unideb.webdev.dao.entity.CityEntity;
-import hu.unideb.webdev.dao.entity.CountryEntity;
+import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
+import hu.unideb.webdev.service.AddressService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * Run -> Configuration -> Environment Variables
@@ -27,6 +21,7 @@ import java.util.Date;
  *  Example configuration
  * @see {project.basedir}/src/main/resources/sql/sakila.sh
  */
+@Slf4j
 @SpringBootApplication
 public class App implements CommandLineRunner {
 
@@ -41,17 +36,21 @@ public class App implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println( "Hello World!" );
-        AddressDao dao = context.getBean(AddressDao.class);
+        AddressService service = context.getBean(AddressService.class);
 //        dao.readAll().stream().forEach(System.out::println);
         Address model = new Address(
                 "address1",
                 "address2",
                 "district",
-                "Batna",
-                "Algeria",
+                "UnknownCity",
+                "Algeria_1234",
                 "postalCode",
                 "phone"
                 );
-        dao.createAddress(model);
+        try {
+            service.recordAddress(model);
+        }catch (UnknownCountryException e){
+            log.error(e.getMessage());
+        }
     }
 }

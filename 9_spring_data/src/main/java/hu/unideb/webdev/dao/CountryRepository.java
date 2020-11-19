@@ -11,5 +11,5 @@ public interface CountryRepository extends CrudRepository<CountryEntity, Integer
     @Override
     Optional<CountryEntity> findById(Integer integer);
 
-    Collection<CountryEntity> findByName(String name);
+    Optional<CountryEntity> findByName(String name);
 }
