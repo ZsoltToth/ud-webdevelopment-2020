@@ -1,5 +1,6 @@
 package hu.unideb.webdev.service;
 
+import hu.unideb.webdev.exceptions.UnknownAddressException;
 import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 
@@ -11,4 +12,5 @@ public interface AddressService {
     Collection<Address> getAddressInCity(String city);
 
     void recordAddress(Address address) throws UnknownCountryException;
+    void deleteAddress(Address address) throws UnknownAddressException;
 }

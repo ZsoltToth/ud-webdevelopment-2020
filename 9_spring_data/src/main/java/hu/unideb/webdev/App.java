@@ -43,13 +43,14 @@ public class App implements CommandLineRunner {
                 "address2",
                 "district",
                 "UnknownCity",
-                "Algeria_1234",
+                "Algeria",
                 "postalCode",
                 "phone"
                 );
         try {
-            service.recordAddress(model);
-        }catch (UnknownCountryException e){
+//            service.recordAddress(model);
+            service.deleteAddress(model);
+        }catch (Exception e){
             log.error(e.getMessage());
         }
     }

@@ -1,5 +1,6 @@
 package hu.unideb.webdev.dao;
 
+import hu.unideb.webdev.exceptions.UnknownAddressException;
 import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 
@@ -18,4 +19,6 @@ public interface AddressDao {
 
     void createAddress(Address address) throws UnknownCountryException;
     Collection<Address> readAll();
+
+    void deleteAddress(Address address) throws UnknownAddressException;
 }

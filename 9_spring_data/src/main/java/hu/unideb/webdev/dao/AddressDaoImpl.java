@@ -3,6 +3,7 @@ package hu.unideb.webdev.dao;
 import hu.unideb.webdev.dao.entity.AddressEntity;
 import hu.unideb.webdev.dao.entity.CityEntity;
 import hu.unideb.webdev.dao.entity.CountryEntity;
+import hu.unideb.webdev.exceptions.UnknownAddressException;
 import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 import lombok.RequiredArgsConstructor;
@@ -87,4 +88,23 @@ public class AddressDaoImpl implements AddressDao{
                 ))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteAddress(Address address) throws UnknownAddressException {
+        Optional<AddressEntity> addressEntity = StreamSupport.stream(addressRepository.findAll().spliterator(),false).filter(
+                entity ->{
+                    return address.getAddress().equals(entity.getAddress())  &&
+                    address.getAddress2().equals(entity.getAddress2()) &&
+                    address.getDistrict().equals(entity.getDistrict()) &&
+                    address.getCity().equals(entity.getCity().getName()) &&
+                    address.getCountry().equals(entity.getCity().getCountry().getName());
+                }
+        ).findAny();
+        if(!addressEntity.isPresent()){
+            throw new UnknownAddressException(String.format("Address Not Found %s",address), address);
+        }
+        addressRepository.delete(addressEntity.get());
+    }
+
+
 }

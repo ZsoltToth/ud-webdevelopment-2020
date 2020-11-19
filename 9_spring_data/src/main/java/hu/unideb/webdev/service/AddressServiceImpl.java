@@ -1,6 +1,7 @@
 package hu.unideb.webdev.service;
 
 import hu.unideb.webdev.dao.AddressDao;
+import hu.unideb.webdev.exceptions.UnknownAddressException;
 import hu.unideb.webdev.exceptions.UnknownCountryException;
 import hu.unideb.webdev.model.Address;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,10 @@ public class AddressServiceImpl implements AddressService{
     @Override
     public void recordAddress(Address address) throws UnknownCountryException {
         addressDao.createAddress(address);
+    }
+
+    @Override
+    public void deleteAddress(Address address) throws UnknownAddressException {
+        addressDao.deleteAddress(address);
     }
 }
