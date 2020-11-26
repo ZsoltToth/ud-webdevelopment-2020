@@ -1,0 +1,32 @@
+@startuml
+
+package "Backend" {
+
+    package "End Point" {
+        [Controller] - [DTO]
+    }
+
+    package "Business Logic" {
+        [Service] - [Model]
+    }
+
+    package "Data Access Object" {
+        [DAO] -down- [Repository]
+        [Repository] -right- [Entity] : use
+    }
+
+    [Controller] -down- [Service]
+    [Service] -down- [DAO]
+
+}
+
+database "MySQL" {
+JDBC -left- [Sample Database]
+}
+
+
+HTTP -down- [Controller]
+[Repository] -down- JDBC
+
+
+@enduml

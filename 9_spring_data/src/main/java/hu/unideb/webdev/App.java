@@ -23,35 +23,11 @@ import org.springframework.context.ApplicationContext;
  */
 @Slf4j
 @SpringBootApplication
-public class App implements CommandLineRunner {
-
-    @Autowired
-    ApplicationContext context;
+public class App {
 
     public static void main( String[] args )
     {
         SpringApplication.run(App.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println( "Hello World!" );
-        AddressService service = context.getBean(AddressService.class);
-//        dao.readAll().stream().forEach(System.out::println);
-        Address model = new Address(
-                "address1",
-                "address2",
-                "district",
-                "UnknownCity",
-                "Algeria",
-                "postalCode",
-                "phone"
-                );
-        try {
-//            service.recordAddress(model);
-            service.deleteAddress(model);
-        }catch (Exception e){
-            log.error(e.getMessage());
-        }
-    }
 }
