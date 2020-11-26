@@ -4,6 +4,8 @@ CONTAINER_NAME=sakila
 ROOT_PASSWORD=secret
 MYSQL_HOME=/home/mysql
 
+SLEEP_INTERVAL=5s
+MAX_NUM_OF_CONNECTION_TRIES=10
 
 if [[ $# -ne 1 ]]
 then
@@ -42,17 +44,25 @@ then
      --env MYSQL_ROOT_PASSWORD=$ROOT_PASSWORD \
      mysql:8
 
-    sleep 30s
-    # TODO: Wait until MySQL started in the container or number of connection refused.
-    # try=0
-    # until [[ $(docker exec $CONTAINER_NAME mysql -u root -p$ROOT_PASSWORD -e ";") ]];
-    # do
-    #     printf "Connection Refused #%d time\n" $try
-    #     try=$(expr $try + 1)
-    #     sleep 1s
-    # done
+    try=0
+    until docker exec $CONTAINER_NAME mysql -u root -p$ROOT_PASSWORD -e ";" 1>/dev/null 2>/dev/null;
+    do
+        printf "Connection Refused #%d time\n" $try
+        try=$(expr $try + 1)
+        sleep $SLEEP_INTERVAL
+        if [ $try -ge $MAX_NUM_OF_CONNECTION_TRIES ]
+        then
+            printf "Too many unsuccessful connection attempts!\n"
+            exit 1
+        fi
+    done
+    printf "Successfull Connection\n"
+    printf "Importing Data...\n"
+
     docker exec $CONTAINER_NAME sh -c "mysql -u root -p$ROOT_PASSWORD < $MYSQL_HOME/sakila-schema.sql 2>/dev/null"
     docker exec $CONTAINER_NAME sh -c "mysql -u root -p$ROOT_PASSWORD < $MYSQL_HOME/sakila-data.sql 2>/dev/null"
+
+    printf "Data was imported!\n"
 
     exit 0
 fi
